@@ -8,6 +8,11 @@
 1. Allows to be generated as a QR code (https://crates.io/crates/qrcodegen) svg file using **svg_to_string** function from https://github.com/nayuki/QR-Code-generator/blob/master/rust/examples/qrcodegen-demo.rs
 
 ### How to use this library: 
+1. Add to Cargo.toml: 
+```
+[dependencies]
+uuidgen = {git = "https://github.com/azavgo/uuidgen"}
+```
 1. Generate a true random UUID-like string:  
 ```
     use uuidgen::UUID;
