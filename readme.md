@@ -7,6 +7,8 @@
 1. Allows to be generated as a QR code using **qrcodegen** crate at https://crates.io/crates/qrcodegen;
 1. Allows to be generated as a QR code (https://crates.io/crates/qrcodegen) svg file using **svg_to_string** function from https://github.com/nayuki/QR-Code-generator/blob/master/rust/examples/qrcodegen-demo.rs
 
+*Note*: This library does not comply with the RFC4122 version 4 (random based) UUIDs
+
 ### How to use this library: 
 1. Add to Cargo.toml: 
 ```
