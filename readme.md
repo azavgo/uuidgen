@@ -10,7 +10,7 @@
 ### How to use this library: 
 1. Generate a true random UUID-like string:  
 ```
-    use truernduuid::UUID;
+    use uuidgen::UUID;
 
     let uuid_gen = UUID::new();
     let uuid = uuid_gen.uuid();
@@ -18,7 +18,7 @@
 ```
 1. Generate QR code from the UUID-like string and write it as a "uuid".svg file: 
 ```
-    use truernduuid::UUID;
+    use uuidgen::UUID;
 
     let uuid_gen = UUID::new();
     uuid_gen.to_svg().unwrap(); 
