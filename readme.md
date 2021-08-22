@@ -17,14 +17,12 @@
 ```
     use uuidgen::UUID;
 
-    let uuid_gen = UUID::new();
-    let uuid = uuid_gen.uuid();
+    let uuid = UUID::new().uuid();
     println!("Generated UUID: {}", &uuid);  
 ```
 3. Generate QR code from the UUID-like string and write it as a "uuid".svg file: 
 ```
     use uuidgen::UUID;
 
-    let uuid_gen = UUID::new();
-    uuid_gen.to_svg().unwrap(); 
+    UUID::new().to_svg().unwrap(); 
 ``` 
