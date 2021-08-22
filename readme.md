@@ -4,8 +4,7 @@
 1. True random generated UUID-like string using an http call to https://qrng.anu.edu.au;
 1. If the https://qrng.anu.edu.au site is not available, random UUID-like string is generated using **rand** crate (https://crates.io/crates/rand); 
 1. Generated UUID-like string is formatted to a low case string without dashes, *e.g.* c69436a1975fe2ebb0a6b09163031397;
-1. Allows to be generated as a QR code using **qrcodegen** crate at https://crates.io/crates/qrcodegen;
-1. Allows to be generated as a QR code (https://crates.io/crates/qrcodegen) svg file using **svg_to_string** function from https://github.com/nayuki/QR-Code-generator/blob/master/rust/examples/qrcodegen-demo.rs
+1. Allows to be generated as a QR code using **qrcodegen** crate (https://crates.io/crates/qrcodegen) svg file using **svg_to_string** function from https://github.com/nayuki/QR-Code-generator/blob/master/rust/examples/qrcodegen-demo.rs
 
 *Note*: This library does not comply with the RFC4122 version 4 (random based) UUIDs
 
