@@ -114,7 +114,7 @@ fn rnd_uuid() -> String {
 // The string always uses Unix newlines (\n), regardless of the platform.
 // From: https://github.com/nayuki/QR-Code-generator/blob/master/rust/examples/qrcodegen-demo.rs
 
-pub fn to_svg_string(qr: &QrCode, border: i32) -> String {
+fn to_svg_string(qr: &QrCode, border: i32) -> String {
     assert!(border >= 0, "Border must be non-negative");
     let mut result = String::new();
     result += "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
