@@ -1,6 +1,6 @@
 use std::fs::write;
 use std::io::Error;
-use std::u8;
+use std::u32;
 
 use qrcodegen::{QrCode, QrCodeEcc};
 use rand::Rng;
@@ -115,12 +115,12 @@ fn rnd_uuid() -> String {
 }
 
 fn to_four(s: &str) -> String {
-    let n = u8::from_str_radix(s, 16).unwrap();
+    let n: u32 = u32::from_str_radix(s, 16).unwrap();
     format!("{:x}", 64 + n - ((n >> 4) << 4))
 }
 
 fn to_two(s: &str) -> String {
-    let n = u8::from_str_radix(s, 16).unwrap();
+    let n: u32 = u32::from_str_radix(s, 16).unwrap();
     format!("{:x}", 128 + n - ((n >> 6) << 6))
 }
 
@@ -155,4 +155,21 @@ fn to_svg_string(qr: &QrCode, border: i32) -> String {
     result += "\" fill=\"#000000\"/>\n";
     result += "</svg>\n";
     result
+}
+
+#[cfg(tests)]
+mod tests; 
+
+mod tests {
+    use super::*;  
+    #[test]
+    fn test_to_four() {
+        assert_eq!("4f".to_string(), to_four("af")); 
+    }
+
+    #[test]
+    fn test_to_two() {
+        assert_eq!("bf".to_string(), to_two("ff")); 
+    }
+
 }
