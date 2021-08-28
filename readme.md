@@ -13,14 +13,14 @@
     [dependencies]
     uuidgen = {git = "https://github.com/azavgo/uuidgen"}
 ```
-2. Generate a true random UUID-like string:  
+2. Generate version 4 UUID string:  
 ```
     use uuidgen::UUID;
 
     let uuid = UUID::new().uuid();
     println!("Generated UUID: {}", &uuid);  
 ```
-3. Generate QR code from the UUID-like string and write it as a "uuid".svg file: 
+3. Generate QR code from the generated UUID string and write it as a "uuid".svg file: 
 ```
     use uuidgen::UUID;
 
