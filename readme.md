@@ -20,7 +20,7 @@
     let uuid = UUID::new().uuid();
     println!("Generated UUID: {}", &uuid);  
 ```
-3. Generate QR code from the generated UUID string and write it as a "uuid".svg file: 
+3. Generate QR code from the UUID string and write it as a "uuid".svg file: 
 ```
     use uuidgen::UUID;
 
