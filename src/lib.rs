@@ -103,14 +103,24 @@ fn u8_hex_rnd() -> String {
 }
 
 fn rnd_uuid() -> String {
-    //let mut rnd_uuid = u8_hex_rnd();
-    //for _i in 0..15 {
-    //    rnd_uuid.push_str(&u8_hex_rnd()[..])
-    //}
-    //rnd_uuid
-    let mut uuid_vec = vec![u8_hex_rnd(); 16];
-    uuid_vec[6] = to_four(uuid_vec[6].as_str());
-    uuid_vec[8] = to_two(uuid_vec[8].as_str());
+    let uuid_vec = vec![
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        to_four(u8_hex_rnd().as_str()),
+        u8_hex_rnd(),
+        to_two(u8_hex_rnd().as_str()),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+        u8_hex_rnd(),
+    ];
     uuid_vec.join("")
 }
 
