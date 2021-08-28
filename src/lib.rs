@@ -1,5 +1,6 @@
 use std::fs::write;
 use std::io::Error;
+use std::u8;
 
 use qrcodegen::{QrCode, QrCodeEcc};
 use rand::Rng;
@@ -36,9 +37,9 @@ impl ANUqrng {
             &anu_qrnd.data()[3][..],
             &anu_qrnd.data()[4][..],
             &anu_qrnd.data()[5][..],
-            &anu_qrnd.data()[6][..],
+            to_four(&anu_qrnd.data()[6][..]).as_str(),
             &anu_qrnd.data()[7][..],
-            &anu_qrnd.data()[8][..],
+            to_two(&anu_qrnd.data()[8][..]).as_str(),
             &anu_qrnd.data()[9][..],
             &anu_qrnd.data()[10][..],
             &anu_qrnd.data()[11][..],
@@ -102,11 +103,25 @@ fn u8_hex_rnd() -> String {
 }
 
 fn rnd_uuid() -> String {
-    let mut rnd_uuid = u8_hex_rnd();
-    for _i in 0..15 {
-        rnd_uuid.push_str(&u8_hex_rnd()[..])
-    }
-    rnd_uuid
+    //let mut rnd_uuid = u8_hex_rnd();
+    //for _i in 0..15 {
+    //    rnd_uuid.push_str(&u8_hex_rnd()[..])
+    //}
+    //rnd_uuid
+    let mut uuid_vec = vec![u8_hex_rnd(); 16]; 
+    uuid_vec[6] = to_four(uuid_vec[6].as_str()); 
+    uuid_vec[8] = to_two(uuid_vec[8].as_str()); 
+    uuid_vec.join("")
+}
+
+fn to_four(s: &str) -> String {
+    let n = u8::from_str_radix(s, 16).unwrap();
+    format!("{:x}", 64 + n - ((n >> 4) << 4)) 
+}
+
+fn to_two(s: &str) -> String {
+    let n = u8::from_str_radix(s, 16).unwrap();
+    format!("{:x}", 128 + n - ((n >> 6) << 6))
 }
 
 // Returns a string of SVG code for an image depicting
