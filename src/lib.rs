@@ -108,15 +108,15 @@ fn rnd_uuid() -> String {
     //    rnd_uuid.push_str(&u8_hex_rnd()[..])
     //}
     //rnd_uuid
-    let mut uuid_vec = vec![u8_hex_rnd(); 16]; 
-    uuid_vec[6] = to_four(uuid_vec[6].as_str()); 
-    uuid_vec[8] = to_two(uuid_vec[8].as_str()); 
+    let mut uuid_vec = vec![u8_hex_rnd(); 16];
+    uuid_vec[6] = to_four(uuid_vec[6].as_str());
+    uuid_vec[8] = to_two(uuid_vec[8].as_str());
     uuid_vec.join("")
 }
 
 fn to_four(s: &str) -> String {
     let n = u8::from_str_radix(s, 16).unwrap();
-    format!("{:x}", 64 + n - ((n >> 4) << 4)) 
+    format!("{:x}", 64 + n - ((n >> 4) << 4))
 }
 
 fn to_two(s: &str) -> String {
