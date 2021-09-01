@@ -9,19 +9,19 @@
 
 ### How to use this library: 
 1. Add to Cargo.toml: 
-```
+```Toml
     [dependencies]
     uuidgen = {git = "https://github.com/azavgo/uuidgen"}
 ```
 2. Generate version 4 UUID string:  
-```
+```Rust
     use uuidgen::UUID;
 
     let uuid = UUID::new().uuid();
     println!("Generated UUID: {}", &uuid);  
 ```
 3. Generate QR code from the UUID string and write it as a "uuid".svg file: 
-```
+```Rust
     use uuidgen::UUID;
 
     UUID::new().to_svg().unwrap(); 
