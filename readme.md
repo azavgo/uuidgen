@@ -15,14 +15,21 @@
 ```
 2. Generate version 4 UUID string:  
 ```Rust
-    use uuidgen::UUID;
+    use uuidgen::{UUID, UUIDError};
 
-    let uuid = UUID::new().uuid();
-    println!("Generated UUID: {}", &uuid);  
+    fn main() -> Result<(), UUIDError>{
+        let uuid = UUID::new()?.uuid();
+        println!("Generated UUID: {}", &uuid); 
+        Ok(())
+    }
+  
 ```
 3. Generate QR code from the UUID string and write it as a "uuid".svg file: 
 ```Rust
-    use uuidgen::UUID;
+    use uuidgen::{UUID, UUIDError};
 
-    UUID::new().to_svg().unwrap(); 
+    fn main() -> Result<(), UUIDError>{
+        UUID::new()?.to_svg()?;
+        Ok(())
+    } 
 ``` 
