@@ -14,7 +14,7 @@ struct ANUqrng {
 }
 
 impl ANUqrng {
-    fn new() -> Result<Self, CustomError> {
+    fn new() -> Result<Self, UUIDError> {
         let anu_qrng = reqwest::blocking::get(
             "https://qrng.anu.edu.au/API/jsonI.php?length=16&type=hex16&size=1",
         )?
@@ -27,7 +27,7 @@ impl ANUqrng {
         &self.data
     }
 
-    fn anu_qrng_uuid() -> Result<String, CustomError> {
+    fn anu_qrng_uuid() -> Result<String, UUIDError> {
         let anu_qrnd = Self::new()?;
         let uuid = [
             &anu_qrnd.data()[0][..],
@@ -58,7 +58,7 @@ pub struct UUID {
 }
 
 impl UUID {
-    pub fn new() -> Result<Self, CustomError> {
+    pub fn new() -> Result<Self, UUIDError> {
         let anu_qrng = ANUqrng::anu_qrng_uuid();
         let uuid = match anu_qrng {
             Ok(uuid_qrng) => uuid_qrng,
@@ -72,7 +72,7 @@ impl UUID {
         self.uuid
     }
 
-    pub fn to_svg(self) -> Result<(), CustomError> {
+    pub fn to_svg(self) -> Result<(), UUIDError> {
         let uuid = self.uuid();
         match QrCode::encode_text(&uuid[..], QrCodeEcc::Medium) {
             Ok(uuid_qrcode) => {
@@ -101,7 +101,7 @@ fn u8_hex_rnd() -> String {
     h
 }
 
-fn rnd_uuid() -> Result<String, CustomError> {
+fn rnd_uuid() -> Result<String, UUIDError> {
     let uuid_vec = vec![
         u8_hex_rnd(),
         u8_hex_rnd(),
@@ -123,39 +123,39 @@ fn rnd_uuid() -> Result<String, CustomError> {
     Ok(uuid_vec.join(""))
 }
 
-fn to_four(s: &str) -> Result<String, CustomError> {
+fn to_four(s: &str) -> Result<String, UUIDError> {
     let n: u32 = u32::from_str_radix(s, 16)?;   
     Ok(format!("{:x}", 64 + n - ((n >> 4) << 4))) 
 
 }
 
-fn to_two(s: &str) -> Result<String, CustomError> {
+fn to_two(s: &str) -> Result<String, UUIDError> {
     let n: u32 = u32::from_str_radix(s, 16)?;
     Ok(format!("{:x}", 128 + n - ((n >> 6) << 6)))
 }
 
 #[derive(Debug)]
-pub enum CustomError {
+pub enum UUIDError {
     ReqwestError(reqwest::Error), 
     IOError(std::io::Error),  
     ParseIntError(std::num::ParseIntError),   
 }
 
-impl From<reqwest::Error> for CustomError {
+impl From<reqwest::Error> for UUIDError {
     fn from(error: reqwest::Error) -> Self {
-        CustomError::ReqwestError(error)
+        UUIDError::ReqwestError(error)
     }
 }
 
-impl From<std::io::Error> for CustomError {
+impl From<std::io::Error> for UUIDError {
     fn from(error: std::io::Error) -> Self {
-        CustomError::IOError(error)
+        UUIDError::IOError(error)
     }
 }
 
-impl From<std::num::ParseIntError> for CustomError {
+impl From<std::num::ParseIntError> for UUIDError {
     fn from(error: std::num::ParseIntError) -> Self {
-        CustomError::ParseIntError(error)
+        UUIDError::ParseIntError(error)
     }
 }
 
