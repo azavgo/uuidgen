@@ -11,7 +11,7 @@
 1. Add to Cargo.toml: 
 ```Toml
     [dependencies]
-    uuidgen = {git = "https://github.com/azavgo/uuidgen"}
+    uuidgen = {git = "https://github.com/azavgo/uuidgen", branch = "main"}
 ```
 2. Generate version 4 UUID string:  
 ```Rust
